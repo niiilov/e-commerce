@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func createJWT(username string) (string, error) {
+func CreateJWT(username string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": username,
 		"exp":      time.Now().Add(time.Hour * 24).Unix(),
