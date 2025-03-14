@@ -3,18 +3,16 @@ package db
 import (
 	"database/sql"
 
-	"github.com/joho/godotenv"
+	"github.com/niiilov/e-commerce/internal/utils"
 )
 
 var DB *sql.DB
 
 func InitDB() error {
-	env, err := godotenv.Read(".env")
+	psqlInfo, err := utils.Env("DB_CONNECT")
 	if err != nil {
 		return err
 	}
-
-	psqlInfo := env["DB_CONNECT"]
 
 	DB, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
