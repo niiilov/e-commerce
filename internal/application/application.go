@@ -4,11 +4,13 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	_ "github.com/niiilov/e-commerce/cmd/docs"
 	"github.com/niiilov/e-commerce/internal/user/del"
 	"github.com/niiilov/e-commerce/internal/user/edit"
 	"github.com/niiilov/e-commerce/internal/user/inf"
 	"github.com/niiilov/e-commerce/internal/user/login"
 	"github.com/niiilov/e-commerce/internal/user/reg"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"go.uber.org/zap"
 )
 
@@ -30,6 +32,9 @@ func New() *APIs {
 }
 
 func (a *APIs) Routing() {
+
+	// @swagger
+	a.router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 	//user
 	a.router.HandleFunc("/user/reg", reg.RegHandler).Methods("POST")         // registration
 	a.router.HandleFunc("/user/login", login.LoginHandler).Methods("POST")   // authentification
